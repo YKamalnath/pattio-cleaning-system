@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PhoneCall, MessageCircle } from "lucide-react";
+import { Loader2, PhoneCall, MessageCircle } from "lucide-react";
 import { services } from "../data/services";
 import { business, waBaseUrl } from "../config/business";
 import { cn } from "../utils/cn";
@@ -34,6 +34,7 @@ export default function ContactForm({
   const [status, setStatus] = React.useState<
     "idle" | "submitting" | "submitted" | "error"
   >("idle");
+  const isSubmitting = status === "submitting";
 
   const {
     register,
@@ -79,11 +80,12 @@ export default function ContactForm({
       if (!res.ok) throw new Error("Quote endpoint not available");
     } catch {
       // No backend configured: proceed with WhatsApp fallback.
-      window.open(
-        waBaseUrl(messageText),
-        "_blank",
-        "noopener,noreferrer",
-      );
+      try {
+        window.open(waBaseUrl(messageText), "_blank", "noopener,noreferrer");
+      } catch {
+        setStatus("error");
+        return;
+      }
     }
 
     setStatus("submitted");
@@ -96,10 +98,15 @@ export default function ContactForm({
   );
 
   return (
-    <div className={cn("rounded-3xl border border-white/10 bg-white/5 p-5 shadow-soft backdrop-blur sm:p-7", className)}>
+    <div
+      className={cn(
+        "rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-soft backdrop-blur-xl sm:p-7",
+        className,
+      )}
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-sm font-bold tracking-wide text-brandGreen/90">
+          <div className="text-sm font-bold tracking-wide text-accent">
             Fast quote, UK-wide
           </div>
           <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
@@ -126,7 +133,8 @@ export default function ContactForm({
           <span className="text-sm font-semibold text-white/85">Full Name</span>
           <input
             {...register("fullName")}
-            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            disabled={isSubmitting}
+            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
             placeholder="e.g., Alex Brown"
             autoComplete="name"
           />
@@ -143,7 +151,8 @@ export default function ContactForm({
           </span>
           <input
             {...register("phoneNumber")}
-            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            disabled={isSubmitting}
+            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
             placeholder="e.g., 07xxx xxx xxx"
             autoComplete="tel"
           />
@@ -158,7 +167,8 @@ export default function ContactForm({
           <span className="text-sm font-semibold text-white/85">Email</span>
           <input
             {...register("email")}
-            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            disabled={isSubmitting}
+            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
             placeholder="you@example.com"
             autoComplete="email"
           />
@@ -173,7 +183,8 @@ export default function ContactForm({
           <span className="text-sm font-semibold text-white/85">Address</span>
           <input
             {...register("address")}
-            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            disabled={isSubmitting}
+            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
             placeholder="Street, Town, Postcode"
             autoComplete="street-address"
           />
@@ -190,7 +201,8 @@ export default function ContactForm({
           </span>
           <select
             {...register("serviceRequired")}
-            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            disabled={isSubmitting}
+            className="h-12 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
           >
             {services.map((s) => (
               <option key={s.id} value={s.id}>
@@ -211,8 +223,9 @@ export default function ContactForm({
           <span className="text-sm font-semibold text-white/85">Message</span>
           <textarea
             {...register("message")}
+            disabled={isSubmitting}
             rows={4}
-            className="min-h-[140px] resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-brandGreen/60 focus:outline-none focus:ring-2 focus:ring-brandGreen/25"
+            className="min-h-[140px] resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25 disabled:cursor-not-allowed"
             placeholder="Tell us about the size of the area, any moss/algae, and what results you want..."
           />
           {errors.message ? (
@@ -225,10 +238,16 @@ export default function ContactForm({
         <div className="sm:col-span-2">
           <button
             type="submit"
-            disabled={status === "submitting"}
-            className="h-12 w-full rounded-2xl bg-brandGreen px-6 text-sm font-bold text-ink shadow-glow transition hover:bg-brandGreen2 disabled:opacity-70"
+            disabled={isSubmitting}
+            aria-busy={isSubmitting}
+            className="h-12 w-full rounded-2xl bg-accent px-6 text-sm font-bold text-ink shadow-glow transition hover:bg-brandGreen2 disabled:opacity-70"
           >
-            {status === "submitting" ? "Submitting..." : "Request a Quote"}
+            <span className="inline-flex items-center justify-center gap-2">
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : null}
+              {isSubmitting ? "Sending..." : "Request a Quote"}
+            </span>
           </button>
         </div>
 
@@ -245,7 +264,7 @@ export default function ContactForm({
                 href={callHref}
                 className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/5 px-4 py-3 text-sm font-bold text-white ring-1 ring-white/10 hover:bg-white/10"
               >
-                <PhoneCall className="h-4 w-4 text-brandGreen" />
+                <PhoneCall className="h-4 w-4 text-accent" />
                 Call now
               </a>
               <a

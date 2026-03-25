@@ -21,7 +21,7 @@ export default function SiteLayout({
     <div className="min-h-screen bg-transparent">
       <ScrollToTop />
       <Header />
-      <main className="mx-auto min-h-[60vh] pt-[74px]">
+      <main className="mx-auto min-h-[60vh] pt-0">
         {children}
       </main>
       <Footer />

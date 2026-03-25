@@ -1,25 +1,37 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SiteLayout from "./layouts/SiteLayout";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Areas from "./pages/Areas";
-import Gallery from "./pages/Gallery";
-import Reviews from "./pages/Reviews";
-import Contact from "./pages/Contact";
 
 export default function App() {
   return (
     <SiteLayout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/areas-we-cover" element={<Areas />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/about"
+          element={<Navigate to="/#why-choose-us" replace />}
+        />
+        <Route
+          path="/services"
+          element={<Navigate to="/#services" replace />}
+        />
+        <Route
+          path="/areas-we-cover"
+          element={<Navigate to="/#contact" replace />}
+        />
+        <Route
+          path="/gallery"
+          element={<Navigate to="/#gallery" replace />}
+        />
+        <Route
+          path="/reviews"
+          element={<Navigate to="/#testimonials" replace />}
+        />
+        <Route
+          path="/contact"
+          element={<Navigate to="/#contact" replace />}
+        />
         <Route
           path="*"
           element={

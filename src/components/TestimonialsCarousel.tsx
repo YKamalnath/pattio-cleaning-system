@@ -15,7 +15,7 @@ function Stars({ rating }: { rating: number }) {
             key={i}
             className={cn(
               "h-4 w-4",
-              filled ? "fill-brandGreen text-brandGreen" : "text-white/25",
+              filled ? "fill-accent text-accent" : "text-white/25",
             )}
           />
         );
@@ -62,7 +62,7 @@ export default function TestimonialsCarousel({
     >
       <div className="flex items-center justify-between gap-4">
         <div className="hidden sm:flex items-center gap-2 text-sm font-bold text-white/70">
-          <span className="h-2 w-2 rounded-full bg-brandGreen shadow-glow" />
+          <span className="h-2 w-2 rounded-full bg-accent shadow-glow" />
           Customer feedback
         </div>
         <div className="flex items-center gap-2">
@@ -141,7 +141,7 @@ export default function TestimonialsCarousel({
               aria-label={`Go to testimonial ${i + 1}`}
               className={cn(
                 "h-2.5 w-2.5 rounded-full transition",
-                active ? "bg-brandGreen shadow-glow" : "bg-white/20 hover:bg-white/30",
+                  active ? "bg-accent shadow-glow" : "bg-white/20 hover:bg-white/30",
               )}
             />
           );

@@ -49,21 +49,26 @@ export default function GalleryGrid({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.35, delay: idx * 0.02 }}
-            className="group text-left"
+            className="group text-left focus:outline-none"
           >
-            <Card className="p-0 overflow-hidden transition group-hover:ring-1 group-hover:ring-brandGreen/40">
+            <Card
+              className="p-0 overflow-hidden transition group-hover:ring-1 group-hover:ring-accent/40"
+            >
               <div className="relative h-56">
                 <img
                   src={item.afterUrl}
                   alt={item.title}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.05]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition group-hover:from-black/80" />
+                <div className="absolute inset-0 opacity-0 transition group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.25),transparent_45%)]" />
+
                 <div className="absolute left-4 top-4 rounded-2xl bg-white/10 px-3 py-2 text-xs font-bold text-white/90 ring-1 ring-white/15 backdrop-blur">
-                  Before/After Fix
+                  Restoration sample
                 </div>
-                <div className="absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-brandGreen px-3 py-2 text-xs font-bold text-ink shadow-glow opacity-90 transition group-hover:opacity-100">
+
+                <div className="absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-accent px-3 py-2 text-xs font-bold text-ink shadow-glow opacity-95 transition group-hover:opacity-100">
                   <PlusSquare className="h-4 w-4" />
                   View
                 </div>

@@ -11,13 +11,24 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
     Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: #eaf2ff;
-  background: radial-gradient(900px 500px at 15% 0%, rgba(27, 170, 107, 0.15), transparent 55%),
-    radial-gradient(800px 500px at 85% 10%, rgba(11, 43, 75, 1), transparent 60%),
-    linear-gradient(180deg, #050a13 0%, #07152a 35%, #050a13 100%);
+  background-color: #020617;
+  background-image:
+    radial-gradient(900px 520px at 15% 0%, rgba(56, 189, 248, 0.22), transparent 55%),
+    radial-gradient(900px 520px at 85% 10%, rgba(34, 197, 94, 0.18), transparent 60%),
+    radial-gradient(700px 420px at 50% 85%, rgba(34, 197, 94, 0.1), transparent 60%),
+    linear-gradient(180deg, rgba(2, 6, 23, 1) 0%, rgba(15, 23, 42, 1) 45%, rgba(2, 6, 23, 1) 100%),
+    repeating-linear-gradient(135deg, rgba(56, 189, 248, 0.035) 0, rgba(56, 189, 248, 0.035) 1px, transparent 1px, transparent 9px),
+    repeating-linear-gradient(45deg, rgba(34, 197, 94, 0.02) 0, rgba(34, 197, 94, 0.02) 1px, transparent 1px, transparent 11px);
+  background-attachment: fixed;
 }
 
 /* Helps anchor scroll without hiding content under sticky header */
 .anchor-offset {
   scroll-margin-top: 90px;
+}
+
+::selection {
+  background: rgba(34, 197, 94, 0.25);
+  color: #eaf2ff;
 }
 
