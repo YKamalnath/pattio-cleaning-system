@@ -30,16 +30,16 @@ export default function Header() {
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-highlight/0 via-highlight/40 to-accent/0" />
 
-      <div className="mx-auto flex h-[74px] max-w-[1320px] items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[74px] max-w-[1320px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/#top" className="group flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 transition group-hover:bg-white/15">
             <div className="h-5 w-5 rounded-full bg-accent shadow-glow" />
           </div>
-          <div className="leading-tight">
-            <div className="text-sm font-bold text-white sm:text-base">
+          <div className="min-w-0 leading-tight">
+            <div className="truncate whitespace-nowrap text-sm font-bold text-white sm:text-base">
               {business.name}
             </div>
-            <div className="hidden text-xs text-white/70 sm:block">
+            <div className="hidden truncate whitespace-nowrap text-xs text-white/70 sm:block">
               Patio Cleaning & Outdoor Cleaning
             </div>
           </div>
@@ -72,10 +72,10 @@ export default function Header() {
             href={waBaseUrl("Hi! I’d like a free quote.")}
             target="_blank"
             rel="noreferrer"
-            className="px-4"
+            className="px-3 xl:px-4"
           >
             <MessageCircle className="h-4 w-4" />
-            WhatsApp
+            <span className="hidden xl:inline">WhatsApp</span>
           </Button>
 
           <Button
