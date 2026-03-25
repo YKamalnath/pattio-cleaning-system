@@ -8,6 +8,9 @@ import GalleryGrid from "../GalleryGrid";
 import Reveal from "../Reveal";
 import Button from "../Button";
 import { gallery } from "../../data/gallery";
+import BeforeAfterHorizontalParallax from "./BeforeAfterHorizontalParallax";
+import LazyOnVisible from "../luxury/LazyOnVisible";
+import { Skeleton } from "../luxury/Skeleton";
 
 export default function BeforeAfterSection() {
   const g0 = gallery[0];
@@ -67,6 +70,10 @@ export default function BeforeAfterSection() {
           </div>
         </div>
 
+        <div className="mt-12">
+          <BeforeAfterHorizontalParallax items={gallery} />
+        </div>
+
         <Reveal delay={0.12}>
           <div className="mt-12">
             <div className="flex items-center justify-between gap-4">
@@ -86,7 +93,9 @@ export default function BeforeAfterSection() {
         </Reveal>
 
         <div className="mt-8">
-          <GalleryGrid items={gallery} />
+          <LazyOnVisible fallback={<Skeleton className="h-[520px]" />}>
+            <GalleryGrid items={gallery} />
+          </LazyOnVisible>
         </div>
       </Container>
     </Section>

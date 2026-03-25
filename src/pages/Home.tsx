@@ -6,8 +6,27 @@ import BeforeAfterSection from "../components/landing/BeforeAfterSection";
 import WhyChooseSection from "../components/landing/WhyChooseSection";
 import TestimonialsSection from "../components/landing/TestimonialsSection";
 import ContactSection from "../components/landing/ContactSection";
+import PriceEstimatorSection from "../components/landing/PriceEstimatorSection";
+import HowItWorksSection from "../components/landing/HowItWorksSection";
+import FAQSection from "../components/landing/FAQSection";
+import TrustedBySection from "../components/landing/TrustedBySection";
+import EmergencyCallout from "../components/landing/EmergencyCallout";
+import SeasonalPromotionBanner from "../components/landing/SeasonalPromotionBanner";
+import InstantQuoteModal, { type QuotePrefill } from "../components/InstantQuoteModal";
+import LazyOnVisible from "../components/luxury/LazyOnVisible";
+import { Skeleton } from "../components/luxury/Skeleton";
 
 export default function Home() {
+  const [quoteOpen, setQuoteOpen] = React.useState(false);
+  const [quotePrefill, setQuotePrefill] = React.useState<QuotePrefill | undefined>(
+    undefined,
+  );
+
+  const onInstantQuote = (prefill?: QuotePrefill) => {
+    setQuotePrefill(prefill);
+    setQuoteOpen(true);
+  };
+
   React.useEffect(() => {
     const scrollToHash = () => {
       const hash = window.location.hash;
@@ -30,12 +49,34 @@ export default function Home() {
         title="Premium Patio Cleaning Services"
         description="Bring your patio back to life with premium pressure washing and moss/algae removal. Fast, free quotes across London and the UK."
       />
-      <HeroSection />
-      <ServicesSection />
+      <HeroSection onInstantQuote={onInstantQuote} />
+      <ServicesSection onInstantQuote={onInstantQuote} />
       <BeforeAfterSection />
       <WhyChooseSection />
-      <TestimonialsSection />
-      <ContactSection />
+      <TrustedBySection />
+      <EmergencyCallout />
+      <SeasonalPromotionBanner />
+      <PriceEstimatorSection onInstantQuote={onInstantQuote} />
+      <HowItWorksSection />
+      <LazyOnVisible
+        fallback={<Skeleton className="h-[440px] bg-white/50" />}
+      >
+        <TestimonialsSection />
+      </LazyOnVisible>
+
+      <LazyOnVisible fallback={<Skeleton className="h-[520px]" />}>
+        <ContactSection />
+      </LazyOnVisible>
+
+      <LazyOnVisible fallback={<Skeleton className="h-[420px]" />}>
+        <FAQSection />
+      </LazyOnVisible>
+
+      <InstantQuoteModal
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+        prefill={quotePrefill}
+      />
     </>
   );
 }

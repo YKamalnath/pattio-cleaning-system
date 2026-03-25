@@ -5,25 +5,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#020617", // Deep Navy
-        secondary: "#0F172A", // Slate
-        accent: "#22C55E", // Neon Green
-        highlight: "#38BDF8", // Sky Blue
+        /* Luxury palette */
+        primary: "#0F172A", // Deep Navy
+        secondary: "#10B981", // Emerald Green
+        accent: "#F59E0B", // Gold/Amber
+        highlight: "#10B981", // Secondary glow accent
+
+        background: "#FAFAF9",
+        ink: "#0F172A",
+        text: "#334155",
 
         // Back-compat tokens (existing components use these names)
-        brandBlue: "#020617",
-        brandGreen: "#22C55E",
-        brandGreen2: "#16A34A",
-        ink: "#0F172A",
-        text: "#EAF2FF",
+        brandBlue: "#0F172A",
+        brandGreen: "#10B981",
+        brandGreen2: "#047857",
       },
       boxShadow: {
-        soft: "0 10px 30px rgba(2, 6, 23, 0.35)",
-        glow: "0 0 0 1px rgba(34, 197, 94, 0.25), 0 18px 50px rgba(34, 197, 94, 0.22)",
-        highlight: "0 0 0 1px rgba(56, 189, 248, 0.25), 0 18px 50px rgba(56, 189, 248, 0.18)",
+        soft: "0 10px 30px rgba(15, 23, 42, 0.25)",
+        /* Premium amber glow */
+        glow: "0 0 0 1px rgba(245, 158, 11, 0.25), 0 18px 50px rgba(245, 158, 11, 0.18)",
+        /* Emerald glow (used by some secondary accent styles) */
+        highlight: "0 0 0 1px rgba(16, 185, 129, 0.22), 0 18px 50px rgba(16, 185, 129, 0.16)",
       },
       borderRadius: {
         xl2: "1rem",
+      },
+      fontFamily: {
+        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial"],
+        serif: ["Playfair Display", "ui-serif", "Georgia", "Cambria", "Times New Roman", "Times", "serif"],
       },
       transitionTimingFunction: {
         "cubic-bezier-fast": "cubic-bezier(0.2, 0.8, 0.2, 1)",

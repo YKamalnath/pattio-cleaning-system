@@ -33,6 +33,7 @@ export default function TestimonialsCarousel({
 }) {
   const [index, setIndex] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
+  const touchStartX = React.useRef<number | null>(null);
 
   const next = React.useCallback(() => {
     setIndex((v) => (v + 1) % items.length);
@@ -59,6 +60,19 @@ export default function TestimonialsCarousel({
       className={cn("relative", className)}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0]?.clientX ?? null;
+      }}
+      onTouchEnd={(e) => {
+        const start = touchStartX.current;
+        touchStartX.current = null;
+        if (start == null) return;
+        const end = e.changedTouches[0]?.clientX ?? start;
+        const dx = end - start;
+        if (Math.abs(dx) < 45) return;
+        if (dx < 0) next();
+        else prev();
+      }}
     >
       <div className="flex items-center justify-between gap-4">
         <div className="hidden sm:flex items-center gap-2 text-sm font-bold text-white/70">

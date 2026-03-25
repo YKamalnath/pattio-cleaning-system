@@ -13,9 +13,9 @@ export default function Card({
   return (
     <div
       className={cn(
-        "rounded-3xl border p-5 shadow-soft backdrop-blur-xl transition",
+        "rounded-3xl border p-5 shadow-soft backdrop-blur-xl transition transform-gpu hover:-translate-y-0.5",
         tone === "dark"
-          ? "border-white/10 bg-white/5 text-white hover:border-white/15"
+          ? "border-white/10 bg-white/5 text-white hover:border-white/15 hover:shadow-highlight"
           : "border-slate-200/70 bg-white/80 text-slate-950 hover:border-slate-200/90",
         className,
       )}

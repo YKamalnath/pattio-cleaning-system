@@ -7,12 +7,14 @@ export default function SectionHeading({
   description,
   align = "center",
   tone = "dark",
+  titleGradient = false,
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "center" | "left";
   tone?: "dark" | "light";
+  titleGradient?: boolean;
 }) {
   return (
     <div
@@ -29,8 +31,12 @@ export default function SectionHeading({
       ) : null}
       <h2
         className={cn(
-          "mt-4 text-4xl font-extrabold leading-tight sm:text-5xl",
-          tone === "dark" ? "text-white" : "text-slate-950",
+          "mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl font-serif",
+          titleGradient
+            ? "bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent"
+            : tone === "dark"
+              ? "text-white"
+              : "text-slate-950",
         )}
       >
         {title}

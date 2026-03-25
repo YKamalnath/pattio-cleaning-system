@@ -11,7 +11,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-2xl bg-accent px-4 py-3 text-sm font-bold text-ink shadow-glow transition hover:bg-brandGreen2 sm:px-5"
+      className="hidden sm:inline-flex fixed bottom-5 right-5 z-50 items-center gap-2 rounded-2xl bg-accent px-4 py-3 text-sm font-bold text-ink shadow-glow transition hover:bg-brandGreen2 sm:px-5"
     >
       <span className="relative rounded-full bg-white/15 p-2">
         <span

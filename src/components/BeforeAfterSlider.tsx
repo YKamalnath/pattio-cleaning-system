@@ -16,13 +16,36 @@ export default function BeforeAfterSlider({
   className?: string;
 }) {
   const [value, setValue] = React.useState(52); // percent shown of `after`
+  const [dragging, setDragging] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement | null>(null);
+
+  const updateFromClientX = React.useCallback((clientX: number) => {
+    const el = rootRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const px = (clientX - r.left) / r.width;
+    const next = Math.round(px * 100);
+    setValue(Math.max(0, Math.min(100, next)));
+  }, []);
 
   return (
     <div
+      ref={rootRef}
       className={cn(
         "relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5",
         className,
       )}
+      onPointerDown={(e) => {
+        setDragging(true);
+        updateFromClientX(e.clientX);
+        (e.currentTarget as HTMLDivElement).setPointerCapture?.(e.pointerId);
+      }}
+      onPointerMove={(e) => {
+        if (!dragging) return;
+        updateFromClientX(e.clientX);
+      }}
+      onPointerUp={() => setDragging(false)}
+      onPointerCancel={() => setDragging(false)}
     >
       <div className="relative h-[320px] w-full sm:h-[400px]">
         {/* After (bottom) */}
@@ -91,7 +114,7 @@ export default function BeforeAfterSlider({
           value={value}
           onChange={(e) => setValue(Number(e.target.value))}
           className={cn(
-            "absolute inset-0 cursor-ew-resize bg-transparent opacity-0",
+            "absolute inset-0 cursor-ew-resize bg-transparent opacity-0 pointer-events-none",
             "focus:opacity-0",
           )}
         />
