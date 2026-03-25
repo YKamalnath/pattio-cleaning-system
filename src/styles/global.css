@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #eaf2ff;
+  background: radial-gradient(900px 500px at 15% 0%, rgba(27, 170, 107, 0.15), transparent 55%),
+    radial-gradient(800px 500px at 85% 10%, rgba(11, 43, 75, 1), transparent 60%),
+    linear-gradient(180deg, #050a13 0%, #07152a 35%, #050a13 100%);
+}
+
+/* Helps anchor scroll without hiding content under sticky header */
+.anchor-offset {
+  scroll-margin-top: 90px;
+}
+
